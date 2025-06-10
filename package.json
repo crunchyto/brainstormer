@@ -10,7 +10,9 @@
     "postinstall": "prisma generate",
     "db:migrate": "prisma migrate deploy",
     "db:push": "prisma db push",
-    "db:seed": "prisma db seed"
+    "db:seed": "prisma db seed",
+    "test:db": "node scripts/test-db.js",
+    "verify:build": "node scripts/verify-build.js"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.9.1",

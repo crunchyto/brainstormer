@@ -38,12 +38,21 @@ npm install
 # Generate Prisma client for PostgreSQL
 npx prisma generate
 
-# Create and apply migration to Neon database
-npx prisma migrate dev --name init
+# Test database connection (optional)
+npm run test:db
 
-# Verify connection
+# Push schema to Neon database (recommended for first deployment)
 npx prisma db push
+
+# OR create formal migration (for ongoing development)
+npx prisma migrate dev --name init
 ```
+
+**Troubleshooting Database Connection:**
+- Ensure your Neon database is active and not sleeping
+- Verify the connection string is correct
+- Check that SSL mode is set to 'require'
+- If connection fails, wait a few minutes for Neon to wake up
 
 ### Step 4: Test Locally with PostgreSQL
 

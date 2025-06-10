@@ -51,11 +51,12 @@ interface Question {
   }[];
 }
 
-export default function ReviewProject({ params }: { params: { assignmentId: string } }) {
+export default function ReviewProject({ params }: { params: Promise<{ assignmentId: string }> }) {
   const { data: session, status } = useSession();
   const router = useRouter();
   
   const [assignment, setAssignment] = useState<Assignment | null>(null);
+  const [assignmentId, setAssignmentId] = useState<string>("");
   const [review, setReview] = useState<Review | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
@@ -66,14 +67,23 @@ export default function ReviewProject({ params }: { params: { assignmentId: stri
   const [completingAssignment, setCompletingAssignment] = useState(false);
 
   useEffect(() => {
+    async function loadParams() {
+      const resolvedParams = await params;
+      setAssignmentId(resolvedParams.assignmentId);
+    }
+    loadParams();
+  }, [params]);
+
+  useEffect(() => {
     if (status === "loading") return;
     if (!session) {
       router.push("/auth/signin");
       return;
     }
+    if (!assignmentId) return;
     
     fetchAssignment();
-  }, [session, status, router, params.assignmentId]);
+  }, [session, status, router, assignmentId]);
 
   const fetchAssignment = async () => {
     try {
@@ -81,7 +91,7 @@ export default function ReviewProject({ params }: { params: { assignmentId: stri
       const response = await fetch("/api/reviews/assignments");
       if (response.ok) {
         const data = await response.json();
-        const foundAssignment = data.assignments.find((a: Assignment) => a.id === params.assignmentId);
+        const foundAssignment = data.assignments.find((a: Assignment) => a.id === assignmentId);
         
         if (!foundAssignment) {
           router.push("/review");

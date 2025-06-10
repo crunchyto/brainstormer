@@ -45,8 +45,8 @@ export default function Brainstorm() {
   const [sessionId, setSessionId] = useState<string>("");
   
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const autoSaveRef = useRef<NodeJS.Timeout>();
-  const timerRef = useRef<NodeJS.Timeout>();
+  const autoSaveRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (status === "loading") return;

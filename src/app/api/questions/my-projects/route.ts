@@ -75,7 +75,7 @@ export async function GET() {
       }
       acc[projectId].questions.push(question);
       return acc;
-    }, {} as Record<string, { project: { id: string; title: string; originalText: string; status: string; createdAt: Date; userId: string }; questions: typeof questions }>);
+    }, {} as Record<string, { project: { id: string; title: string; status: string }; questions: typeof questions }>);
 
     return NextResponse.json({ 
       questionsByProject: Object.values(questionsByProject),

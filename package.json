@@ -5,14 +5,19 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "prisma generate && next build",
+    "build:analyze": "ANALYZE=true npm run build",
+    "build:production": "NODE_ENV=production prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "postinstall": "prisma generate",
     "db:migrate": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
     "test:db": "node scripts/test-db.js",
-    "verify:build": "node scripts/verify-build.js"
+    "verify:build": "node scripts/verify-build.js",
+    "clean": "rm -rf .next && rm -rf node_modules/.cache",
+    "optimize:build": "node scripts/optimize-build.js"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.9.1",

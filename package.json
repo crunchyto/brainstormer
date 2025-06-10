@@ -17,7 +17,8 @@
     "test:db": "node scripts/test-db.js",
     "verify:build": "node scripts/verify-build.js",
     "clean": "rm -rf .next && rm -rf node_modules/.cache",
-    "optimize:build": "node scripts/optimize-build.js"
+    "optimize:build": "node scripts/optimize-build.js",
+    "deploy:check": "node scripts/deploy-checklist.js"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.9.1",

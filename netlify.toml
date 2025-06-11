@@ -4,35 +4,9 @@
   
 [build.environment]
   NODE_VERSION = "20"
-  NPM_FLAGS = "--production=false"
-  # Build optimizations
-  NEXT_TELEMETRY_DISABLED = "1"
-  NETLIFY_NEXT_PLUGIN_SKIP = "false"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-
-[functions]
-  external_node_modules = ["@prisma/client", "prisma", "bcryptjs", "openai"]
-  # Increase function timeout for database operations
-  directory = "netlify/functions"
-  
-[[plugins]]
-  package = "netlify-plugin-cache"
-  [plugins.inputs]
-    paths = ["node_modules", ".next/cache"]
-
-# API routes redirects
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/___netlify-handler"
-  status = 200
-
-# Next.js pages redirects
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
 
 # Security headers
 [[headers]]

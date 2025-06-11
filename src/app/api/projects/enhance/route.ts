@@ -4,10 +4,6 @@ import { prisma } from "@/lib/prisma";
 import { authOptions } from "@/lib/auth";
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
@@ -73,6 +69,11 @@ export async function POST(request: NextRequest) {
         }
       });
     }
+
+    // Initialize OpenAI client
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
 
     // Enhance with OpenAI
     const prompt = `You are a professional business consultant helping to enhance and refine project ideas. 

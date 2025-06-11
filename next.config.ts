@@ -1,16 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Optimize for Netlify deployment
-  output: 'standalone',
-  
-  // Optimize images for static deployment
+  // Optimize images for Netlify deployment
   images: {
     unoptimized: true,
   },
-  
-  // Configure build output
-  distDir: '.next',
   
   // TypeScript configuration
   typescript: {

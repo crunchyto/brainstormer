@@ -38,10 +38,11 @@ export default function SignUp() {
       if (response.ok) {
         router.push("/auth/signin?message=Account created successfully");
       } else {
-        setError(data.error || "An error occurred");
+        setError(data.error || `Server error (${response.status})`);
       }
-    } catch {
-      setError("An error occurred. Please try again.");
+    } catch (error) {
+      console.error("Frontend error:", error);
+      setError(`Network error: ${error instanceof Error ? error.message : "Please try again"}`);
     } finally {
       setLoading(false);
     }
